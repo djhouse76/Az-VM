@@ -1,0 +1,40 @@
+# Set account
+mySubs="00000000-0000-0000-0000-000000000000"  
+location=uksouth
+RG=win-vm-rg
+
+# Set Azure Account
+az account set --subscription $mySubs
+
+# Create Resource Group
+az group create -l $location -n $RG
+
+# Variables
+image=Win2022Datacenter
+vmName=winVM
+pip=vm-pip
+vnetRG=myresourcegroup
+vnetName=migrate-vnet
+subnetName=vm-subnet
+
+# create a public ip
+az network public-ip create -g $RG -l $location -n $pip --sku Standard
+
+# Get VNET subnet resource ID
+SNET_ID=$(az network vnet subnet show -n $subnetName --vnet-name $vnetName --resource-group $vnetRG --query id -o tsv)
+echo $SNET_ID
+
+# Create Azure Linux VM within private VNET
+az vm create -n $vmName -g $RG \
+    --image $image \
+    -l $location \
+    --size Standard_B4ms \
+    --authentication-type password \
+    --admin-username duncanhouse \
+    --admin-password W1nd0wsUs3r! \
+    --public-ip-address $pip \
+    --subnet $SNET_ID
+
+
+# Clean up resources
+az group delete --name $RG --yes --no-wait
