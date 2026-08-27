@@ -1,5 +1,5 @@
-# Set account
-mySubs="00000000-0000-0000-0000-000000000000"  
+# Public template: replace placeholder values for your environment.
+mySubs="00000000-0000-0000-0000-000000000000"
 location=uksouth
 RG=win-vm-rg
 
@@ -10,12 +10,18 @@ az account set --subscription $mySubs
 az group create -l $location -n $RG
 
 # Variables
-image=Win2022Datacenter
+
+# Microsoft Win 11 - nested virtualisation (WSL compatible)
+image=microsoftvisualstudio:windowsplustools:base-win11-gen2:latest
 vmName=winVM
 pip=vm-pip
-vnetRG=myresourcegroup
-vnetName=migrate-vnet
-subnetName=vm-subnet
+vnetRG=vnet-rg
+vnetName=vnet
+subnetName=default
+#Standard_B4ms
+vmsize=Standard_D4s_v3
+adminUsername=<admin-username>
+adminPassword=<strong-password>
 
 # create a public ip
 az network public-ip create -g $RG -l $location -n $pip --sku Standard
@@ -24,14 +30,14 @@ az network public-ip create -g $RG -l $location -n $pip --sku Standard
 SNET_ID=$(az network vnet subnet show -n $subnetName --vnet-name $vnetName --resource-group $vnetRG --query id -o tsv)
 echo $SNET_ID
 
-# Create Azure Linux VM within private VNET
+# Create Azure Windows VM within private VNET
 az vm create -n $vmName -g $RG \
     --image $image \
     -l $location \
-    --size Standard_B4ms \
+    --size $vmsize \
     --authentication-type password \
-    --admin-username duncanhouse \
-    --admin-password W1nd0wsUs3r! \
+    --admin-username $adminUsername \
+    --admin-password $adminPassword \
     --public-ip-address $pip \
     --subnet $SNET_ID
 

@@ -1,5 +1,5 @@
-# Set account
-mySubs="00000000-0000-0000-0000-000000000000"  
+# Public template: replace placeholder values for your environment.
+mySubs="00000000-0000-0000-0000-000000000000"
 location=uksouth
 RG=linux-vm-rg
 
