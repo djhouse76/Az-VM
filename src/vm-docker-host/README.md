@@ -2,6 +2,11 @@
 
 This folder documents practical, public-safe learnings for container egress and controlled ingress on an Azure Linux VM running Docker.
 
+## Quick Links
+
+- **Accessing the Docker host**: Use Azure Bastion SSH — see [../vm-bastion/README.md](../vm-bastion/README.md)
+- **Transferring Docker images and configs**: Transfer files via Bastion SCP — see "File Transfer via Bastion" in [../vm-bastion/README.md](../vm-bastion/README.md)
+
 ## Key Findings
 
 - Keep one firewall authority on host systems using firewalld/nft backend.

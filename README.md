@@ -44,6 +44,7 @@ All examples are designed to be GitHub-shareable and avoid tenant-specific secre
 
 - Confirm Bastion is provisioned and in the expected RG/VNet.
 - Confirm tunneling configuration matches your CLI SSH usage.
+- See [src/vm-bastion/README.md](src/vm-bastion/README.md) for SSH and file transfer guides.
 
 ### Docker Host Egress (443)
 
