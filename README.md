@@ -60,3 +60,24 @@ All examples are designed to be GitHub-shareable and avoid tenant-specific secre
 - Do not commit real passwords, secrets, or tenant-specific credentials.
 - Keep scripts template-based with placeholders.
 - Review diffs before commit to prevent accidental secret leakage.
+
+## Contributing
+
+Found a bug, have suggestions, or want to improve these templates? 
+
+1. **Fork** this repository to your account
+2. Create a **feature branch** for your changes:
+   ```bash
+   git checkout -b feature/your-improvement
+   ```
+3. Make your changes and test thoroughly
+4. **Push** to your fork:
+   ```bash
+   git push origin feature/your-improvement
+   ```
+5. Submit a **Pull Request** back to this repository with:
+   - Clear description of the change
+   - Reasoning or problem it solves
+   - Any testing you've performed
+
+All pull requests are reviewed and greatly appreciated. Please follow the same security practices outlined in the [Security Notes](#security-notes) section.
